@@ -1,0 +1,72 @@
+@if (formMessage.error){
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{formMessage.error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}@else if (formMessage.success){
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{formMessage.success}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="row col-lg-8">
+        <div class="col">
+            <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+            @for (task of tasks; track $index) {
+            <div class="card m-5">
+                <div class="card-header">
+                    <h5 class="card-title">{{task.title}}</h5>
+                </div>
+                <div class="card-body p-5">
+                    <p>{{task.description}}</p>
+                </div>
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header color-gray">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                [attr.data-bs-target]="'#accordion-collapse' + task.id " aria-expanded="false"
+                                [attr.aria-controls]="'accordion-collapse' + task.id">
+                                Comments
+                            </button>
+                        </h2>
+                        <div [id]="'accordion-collapse' + task.id" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionFlushExample">
+                            @for (comment of task.comments; track $index) {
+                            <div class="card text-bg-light">
+                                <div class="card-body">
+                                    <p class="card-text">{{ comment.content }}</p>
+                                    <h5 class="text-muted text-end fs-6 text-break text-lowercase">{{
+                                        comment.profileName }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted text-end fs-6">{{ comment.createdDate|
+                                        date: 'medium' }}</h6>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3 mt-2">
+                                <input class="form-control" formControlName="taskId" type="hidden" value={{task.id}} placeholder="Task Id">
+                                <div class="form-floating">
+                                    <textarea class="form-control" formControlName="content"
+                                        placeholder="Leave a comment here" id="floatingTextarea2"
+                                        style="height: 100px"></textarea>
+                                    <label for="floatingTextarea2">Leave a comment here</label>
+                                </div>
+                            </div>
+                            <div class="col-12 text-end">
+                                <app-button type="submit" variant="warning" size="sm" [outline]="true" (click)="setTaskId(task.id)" [px]=4>Add
+                                    Comment</app-button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            }
+           </form>
+        </div>
+    </div>
+</div>

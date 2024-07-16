@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Tasks</a>
+          </li>
+          @if(token){
+            <li class="nav-item">
+              <a class="nav-link" href="/my-comments">My Comments</a>
+            </li>
+          }
+        </ul>
+        <div class="card-header d-flex justify-content-end">
+          @if(token){
+            <app-button class="mx-3" (click)="logout()" variant="danger" size="md" [outline]="true">Log Out</app-button>
+          }
+          @if(!token){
+            <app-button variant="warning" [routerLink]="['/login']" size="md" [outline]="true">Sign In</app-button>
+          }
+      </div>
+      </div>
+    </div>
+  </nav>

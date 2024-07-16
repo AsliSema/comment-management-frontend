@@ -1,0 +1,31 @@
+@if (formMessage.error){
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{formMessage.error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}@else if (formMessage.success){
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{formMessage.success}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="container">
+    <div class="row justify-content-center m-5">
+      <div class="col-lg-10">
+        @for (comment of comments; track $index) {
+          <div class="card m-3 p-2">
+            <div class="card-body">
+              <p class="card-text"><b>Comment: </b> {{ comment.content }} </p>
+              <p class="card-text"><b>Task Name: </b> {{ comment.title}}</p>
+              <p class="card-text"><b>Task Description: </b> {{ comment.description}}</p>
+            </div>
+            <div class="col-12 text-end">
+                <app-button type="submit" variant="danger" size="sm" [outline]="true" [px]=4 (click)="deleteComment(comment.id)" >Delete Comment</app-button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  
