@@ -40,6 +40,13 @@ export class TasksListComponent {
   getTaskList(){
     this.taskService.getAllTasks().subscribe((response)=>{
       this.tasks = response;
+      
+      this.tasks.forEach(task => {
+        task.comments = task.comments.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime());
+      });
+
+
+      this.tasks = response;
       this.change.markForCheck()
     })
   }

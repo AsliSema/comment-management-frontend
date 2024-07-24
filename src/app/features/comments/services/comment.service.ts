@@ -22,12 +22,7 @@ export class CommentService {
     const url =  `${this.controllerUrl}/user/${userId}`; 
     return this.httpClient.get<GetCommentsByUserId[]>(url);
   }
-
-/*   deleteComment(id: number, userId: number): Observable<void>{
-    const url =  `${this.controllerUrl}/${id}/user/${userId}`; 
-    return this.httpClient.delete<void>(url);
-  } */
-
+  
   deleteComment(id: number, userId: number): Observable<any> {
     const url =  `${this.controllerUrl}/${id}/user/${userId}`; 
     return this.httpClient.delete(url, { responseType: 'text' });

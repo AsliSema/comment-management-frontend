@@ -42,13 +42,13 @@ export class GetCommentsBelongUserComponent {
   getCommentList(){
     if (this.userId !== undefined) {
       this.commentService.getCommentsBelongUser(this.userId).subscribe((response)=>{
-        this.comments = response;
+        this.comments = response
         this.change.markForCheck();
       });
     }
   }
 
-/*   deleteComment(commentId: number){
+  deleteComment(commentId: number){
     this.commentService.deleteComment(commentId , this.userId as number).subscribe({
       error: (error) => {
         this.formMessage = error.error;
@@ -60,33 +60,14 @@ export class GetCommentsBelongUserComponent {
           this.formMessage.success = null; 
           this.change.markForCheck();
         }, 1000);
-        this.formMessage.error = null;
         this.change.markForCheck();
 
         setTimeout(()=>{
+          this.router.navigate(['/']);
           this.getCommentList();
         }, 2000)  
-      }
+      }  
     })
-  } */
- 
-
-  deleteComment(commentId: number) {
-    if (this.userId === undefined) {
-      this.formMessage.error = "User ID is not set.";
-      return;
-    }
-
-    this.commentService.deleteComment(commentId, this.userId).subscribe({
-      error: (error) => {
-        this.formMessage = { success: null, error: error.error };
-        this.change.markForCheck();
-      },
-      complete: () => {
-        this.change.markForCheck();
-        this.getCommentList(); 
-      }
-    });
   }
 
 

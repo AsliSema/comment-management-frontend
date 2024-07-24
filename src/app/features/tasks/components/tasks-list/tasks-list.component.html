@@ -13,6 +13,7 @@
 <div class="container d-flex justify-content-center align-items-center">
     <div class="row col-lg-8">
         <div class="col">
+            <div class="text-center mt-4"><h3>All Tasks</h3></div>
             <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
             @for (task of tasks; track $index) {
             <div class="card m-5">
@@ -34,7 +35,7 @@
                         <div [id]="'accordion-collapse' + task.id" class="accordion-collapse collapse"
                             data-bs-parent="#accordionFlushExample">
                             @for (comment of task.comments; track $index) {
-                            <div class="card text-bg-light">
+                            <div class="card text-bg-light m-2">
                                 <div class="card-body">
                                     <p class="card-text">{{ comment.content }}</p>
                                     <h5 class="text-muted text-end fs-6 text-break text-lowercase">{{

@@ -13,10 +13,12 @@
 <div class="container">
     <div class="row justify-content-center m-5">
       <div class="col-lg-10">
+        <div class="text-center mt-4"><h3>My Comments</h3></div>
         @for (comment of comments; track $index) {
           <div class="card m-3 p-2">
             <div class="card-body">
               <p class="card-text"><b>Comment: </b> {{ comment.content }} </p>
+              <p class="card-text"><b>Created Time: </b> {{ comment.createdDate | date: 'medium'}}</p>
               <p class="card-text"><b>Task Name: </b> {{ comment.title}}</p>
               <p class="card-text"><b>Task Description: </b> {{ comment.description}}</p>
             </div>
